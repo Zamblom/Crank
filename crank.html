@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crank It!</title>
+    <style>
+        div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #rots-div {
+            font-family: sans-serif;
+            top: 10%;
+            display: flex;
+            font-size: 2em;
+            gap: 10px;
+        }
+
+        svg {
+            rotate: 0deg;
+        }
+    </style>
+</head>
+<body>
+    <div id="rots-div">
+        <p>Rotations:</p>
+        <p id="rots">0</p>
+    </div>
+    <div>
+        <svg width="500" height="500" viewBox="0 0 12.7 12.7" version="1.1" id="svg1" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" onmousedown="cranking=true" onmouseup="cranking=false">
+            <defs id="defs1" />
+            <rect style="fill:#a00505;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:bevel" id="rect1" width="0.7480545" height="4.0096049" x="5.9759722" y="1.755196" />
+            <g id="layer1">
+                <circle style="fill:#525252;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:bevel" id="path1" cx="6.3499999" cy="6.3499999" r="0.75781876" />
+                <circle style="fill:#b4b4b4;fill-opacity:1;stroke:#000000;stroke-width:0.199999;stroke-linecap:round;stroke-linejoin:bevel" id="circle1" cx="6.3499999" cy="1.4221169" r="0.57359856" />
+                <circle style="fill:#525252;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:bevel" id="circle2" cx="6.3499999" cy="6.3499999" r="0.42008221" />
+            </g>
+        </svg>
+    </div>
+</body>
+<script>
+    var rotation = 0;
+    var speed = 0;
+    var cranking = false;
+
+    window.addEventListener("load", () => {
+        setInterval(() => {
+            speed += cranking ? 0.1 : -0.5;
+            speed = Math.max(speed, 0);
+            rotation += speed;
+            console.log(rotation);
+            document.querySelector("svg").style.rotate = `${rotation}deg`;
+            document.querySelector("#rots").textContent = Math.floor(rotation / 360);
+        }, 10);
+    });
+</script>
+</html>
